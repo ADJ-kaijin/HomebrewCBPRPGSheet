@@ -216,9 +216,13 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .stage{margin:0 0 12px;padding:8px 10px;font:600 14px/1.25 var(--f-body);background:var(--panel-2);border-left:2px solid #3b3b52;color:var(--dim)}
 .stage.warn{border-left-color:var(--red);color:var(--fg);background:rgba(255,42,85,.1)}
 .stage small{display:block;font:400 11px/1.35 var(--f-data);color:var(--dim);margin-top:2px}
-.cw{display:grid;gap:4px 10px;grid-template-columns:minmax(0,1fr) 132px 30px;align-items:center}
+.cw{display:flex;flex-direction:column;gap:6px}
+.cw .head,.cwr .l1{display:grid;gap:4px 10px;grid-template-columns:minmax(0,1fr) 132px 30px;align-items:center}
 .cw .head{font:600 10.5px/1 var(--f-display);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);padding-bottom:2px}
-.cw .head:last-child{text-align:center}
+.cw .head span:last-child{text-align:center}
+.cwr{display:flex;flex-direction:column;gap:1px;padding-bottom:6px;border-bottom:1px solid var(--line-soft)}
+.cwr input.desc{font:400 12.5px/1.3 var(--f-data);color:var(--dim);border-bottom:1px dashed #34344a;padding:3px 2px}
+.cwr input.desc:focus{color:var(--fg)}
 .cw input[type=checkbox]{appearance:none;-webkit-appearance:none;width:18px;height:18px;margin:0 auto;border:1px solid #6a6980;padding:0;display:grid;place-items:center;cursor:pointer;border-radius:0}
 .cw input[type=checkbox]:checked{background:var(--yellow);border-color:var(--yellow);box-shadow:0 0 6px rgba(252,238,10,.45)}
 .cw input[type=checkbox]:checked::after{content:"";width:8px;height:4px;border-left:2px solid #000;border-bottom:2px solid #000;transform:rotate(-45deg) translate(1px,-1px)}
@@ -281,7 +285,7 @@ input[type=file]::file-selector-button:hover{background:var(--yellow);color:#000
   .wrow.head{display:none}
   .wp{gap:12px}
   .surv{grid-template-columns:1fr}.surv__t{grid-row:auto}.surv__r{justify-content:space-between}
-  .cw{grid-template-columns:minmax(0,1fr) 112px 28px}
+  .cw .head,.cwr .l1{grid-template-columns:minmax(0,1fr) 112px 28px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 @media print{
@@ -395,6 +399,16 @@ input[type=file]::file-selector-button:hover{background:var(--yellow);color:#000
         <div class="wrow head"><span>Arma</span><span>Dano</span><span>Curta / Média / Longa</span><span>Munição atual / total</span></div>
       </div>
     </div></section>
+    <section class="panel"><div class="in">
+      <h2 class="ph">Habilidades de arquétipo</h2>
+      <label class="fld"><span class="lab" style="position:absolute;left:-9999px">Habilidades de arquétipo</span>
+        <textarea id="f_hab" data-k="hab" placeholder="Níveis 1, 5, 10, 15 e 20"></textarea></label>
+    </div></section>
+    <section class="panel"><div class="in">
+      <h2 class="ph">Perks <span class="meta">1 por nível</span></h2>
+      <label class="fld"><span class="lab" style="position:absolute;left:-9999px">Perks</span>
+        <textarea id="f_perks" data-k="perks" placeholder="Nome e efeito resumido, um por linha"></textarea></label>
+    </div></section>
     <section class="panel grow"><div class="in">
       <h2 class="ph">Equipamento</h2>
       <label class="fld fill"><span class="lab" style="position:absolute;left:-9999px">Equipamento</span>
@@ -412,7 +426,7 @@ input[type=file]::file-selector-button:hover{background:var(--yellow);color:#000
       </div>
       <p class="stage" id="stage">Sem sobrecarga</p>
       <div class="cw" id="cw">
-        <span class="head">Implante</span><span class="head">Categoria</span><span class="head">Func.</span>
+        <div class="head"><span>Implante</span><span>Categoria</span><span>Func.</span></div>
       </div>
     </div></section>
     <section class="panel net grow"><div class="in">
@@ -437,16 +451,13 @@ input[type=file]::file-selector-button:hover{background:var(--yellow);color:#000
   </div>
 
   <div class="grid12">
-    <section class="panel c6"><div class="in">
-      <h2 class="ph">Habilidades de arquétipo</h2>
-      <label class="fld"><span class="lab" style="position:absolute;left:-9999px">Habilidades de arquétipo</span>
-        <textarea id="f_hab" data-k="hab" placeholder="Níveis 1, 5, 10, 15 e 20"></textarea></label>
+    <section class="panel c12"><div class="in">
+      <h2 class="ph">Âncora Emocional</h2>
+      <p class="hint" style="margin-bottom:10px">Quem pode tirar o personagem de um surto (Estágio III): 1d20 + Moral + Persuasão contra DT 15, uma tentativa por aliado a cada surto. Vínculo afetivo já estabelecido na história dá +2. Anotar um nome aqui não cria o vínculo.</p>
+      <label class="fld"><span class="lab" style="position:absolute;left:-9999px">Âncora Emocional</span>
+        <textarea id="f_anc" data-k="ancora" style="min-height:84px" placeholder="Quem é, qual a relação e a memória ou lugar que mantém o personagem humano"></textarea></label>
     </div></section>
-    <section class="panel c6"><div class="in">
-      <h2 class="ph">Perks <span class="meta">1 por nível</span></h2>
-      <label class="fld"><span class="lab" style="position:absolute;left:-9999px">Perks</span>
-        <textarea id="f_perks" data-k="perks" placeholder="Nome e efeito resumido, um por linha"></textarea></label>
-    </div></section>
+
     <section class="panel c12"><div class="in">
       <h2 class="ph">Anotações</h2>
       <label class="fld"><span class="lab" style="position:absolute;left:-9999px">Anotações</span>
@@ -555,9 +566,11 @@ input[type=file]::file-selector-button:hover{background:var(--yellow);color:#000
 
   var cw=$('#cw'),cwH='';
   for(var i=0;i<CWN;i++){
-    cwH+='<input data-k="cw_'+i+'_nome" type="text" autocomplete="off" placeholder="Implante '+(i+1)+'" aria-label="Implante '+(i+1)+'">'+
+    cwH+='<div class="cwr"><div class="l1">'+
+      '<input data-k="cw_'+i+'_nome" type="text" autocomplete="off" placeholder="Implante '+(i+1)+'" aria-label="Implante '+(i+1)+'">'+
       '<select data-k="cw_'+i+'_cat" aria-label="Categoria do implante '+(i+1)+'"><option value="">—</option><option value="1">Simples (1)</option><option value="2">Avançado (2)</option><option value="3">Militar (3)</option><option value="4">Experimental (4)</option></select>'+
-      '<input data-k="cw_'+i+'_on" type="checkbox" checked aria-label="Implante '+(i+1)+' funcional" title="Funcional">';
+      '<input data-k="cw_'+i+'_on" type="checkbox" checked aria-label="Implante '+(i+1)+' funcional" title="Funcional"></div>'+
+      '<input class="desc" data-k="cw_'+i+'_desc" type="text" autocomplete="off" placeholder="Descrição rápida: efeito, local do corpo" aria-label="Descrição do implante '+(i+1)+'"></div>';
   }
   cw.insertAdjacentHTML('beforeend',cwH);
 
